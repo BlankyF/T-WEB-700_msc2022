@@ -31,7 +31,7 @@ Agile Methodology
 Github : https://github.com/dryadt/T-WEB-700_msc2022 </br> 
 Trello : https://trello.com/b/F3gcLb0f/t-web-700msc2022 </br>
 Swagger: https://app.swaggerhub.com/apis/dryadt/T-WEB-700_msc2022/1.0.0#/</br> 
-Mock-ups :  https://app.moqups.com/VlL8QBs7VU/view/page/ae973f342 </br> 
+Mock-ups :  _insert mock up here_ </br> 
 Microsoft Teams
 
 ## Project functionnalities and qualities 
