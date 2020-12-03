@@ -1,7 +1,9 @@
 <template>
   <v-card class="registerCard">
     <h1> Register </h1>
+
     <v-text-field
+      required
       v-model="username"
       type="username"
       placeholder="username"
@@ -9,6 +11,7 @@
       solo
       dense
     ></v-text-field>
+
     <v-text-field
       type="email"
       placeholder="email"
@@ -16,7 +19,9 @@
       solo
       dense
     ></v-text-field>
+
     <v-text-field
+      required
       v-model="password"
       type="password"
       placeholder="password"
@@ -24,6 +29,7 @@
       solo
       dense
     ></v-text-field>
+
     <v-text-field
       type="password"
       placeholder="confirm password"
@@ -31,11 +37,13 @@
       solo
       dense
     ></v-text-field>
+
     <v-btn
       @click="register"
       elevation="2"
       class="btnRegister"
     > Register </v-btn>
+
     <v-btn
       text
     ><router-link :to="'/login'" class="btnToLogin">
@@ -45,13 +53,15 @@
 </template>
 
 <script>
-import axios from 'axios'
+/* eslint-disable */
+
+  import axios from 'axios'
 export default {
   name: 'RegisterForm',
   data () {
     return {
-      username: "",
-      password: ""
+      username: null,
+      password: null
     }
   },
   methods: {

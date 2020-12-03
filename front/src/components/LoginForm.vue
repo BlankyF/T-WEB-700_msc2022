@@ -39,30 +39,30 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 
 export default {
   name: 'LoginForm',
-  data() {
+  data () {
     return {
-      username:"",
-      password: ""
+      username: null,
+      password: null
     }
   },
   methods: {
     login () {
-      axios.post('http://localhost:3000/users/login',{
+      axios.post('http://localhost:3000/users/login', {
         username: this.username,
         password: this.password
       })
         .then(response => {
-          localStorage.setItem("JWT",response.data.token);
-          console.log(response.data);
-          this.$router.push({name: 'Home'});
+          localStorage.setItem('JWT', response.data.token)
+          console.log(response.data)
+          this.$router.push({name: 'Home'})
         })
         // recup token localStorage.getItem("JWT")
         // remove token localStorafe.removeItem("JWT")
-        .catch(error => {console.log(error)})
+        .catch(error => { console.log(error) })
     }
   }
 }

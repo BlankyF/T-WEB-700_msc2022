@@ -1,7 +1,7 @@
 /* eslint-disable */
 <template>
   <div id="app">
-      <v-toolbar dense fixed app height="70px">
+      <v-app-bar dense fixed app height="70px">
         <router-link :to="'/'" class="btnHeader">
           <v-img
             lazy-src="https://image.winudf.com/v2/image1/bmV0LmRld2VwLmludHJhbmV0ZXBpdGVjaF9pY29uXzE1NjcwMTU4MzhfMDU5/icon.png?w=340&fakeurl=1"
@@ -33,7 +33,7 @@
             ></v-img>
           </v-btn>
         </v-toolbar-items>
-      </v-toolbar>
+      </v-app-bar>
   </div>
 </template>
 
