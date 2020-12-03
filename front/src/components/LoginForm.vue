@@ -31,9 +31,11 @@
     > Login </v-btn>
     <v-btn
       text
-    ><router-link :to="'/register'" class="btnToRegister">
-      Register ?
-    </router-link></v-btn>
+    >
+      <router-link :to="'/register'" class="btnToRegister">
+        Register ?
+      </router-link>
+    </v-btn>
   </v-card>
 
 </template>
@@ -45,8 +47,8 @@ export default {
   name: 'LoginForm',
   data () {
     return {
-      username: null,
-      password: null
+      username: '',
+      password: ''
     }
   },
   methods: {

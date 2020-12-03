@@ -26,10 +26,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="823219b0-276e-4378-ab93-9138591f7d1e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/components/Footer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/components/Footer.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/components/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/components/Header.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/components/LoginForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/components/LoginForm.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/components/RegisterForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/components/RegisterForm.vue" afterDir="false" />
     </list>
