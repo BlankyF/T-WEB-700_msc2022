@@ -21,5 +21,13 @@ module.exports = {
             };
         });
         return res;
+    },
+
+    getUserId(req) {
+        let token = req;
+        let res;
+        let decoded = jwt.decode(token, {complete:true}); 
+        res = decoded.payload.id;
+        return res ;
     }
 }
