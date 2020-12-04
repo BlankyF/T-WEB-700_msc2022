@@ -22,6 +22,7 @@
 
     <v-text-field
       required
+      type="password"
       v-model="password"
       placeholder="password"
       class="textFieldRegister"
