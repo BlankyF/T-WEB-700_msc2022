@@ -100,6 +100,7 @@ export default {
         .then(response => {
           if (response.data.token) {
             localStorage.setItem('JWT', response.data.token)
+            localStorage.setItem('UserId', response.data.id)
             this.$router.push({name: 'Home'})
           } else {
             this.errorMessage = response.data

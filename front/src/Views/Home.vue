@@ -1,8 +1,8 @@
 <template>
   <div>
     <Header></Header>
-    <Footer></Footer>
     <p> Je suis home </p>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -16,5 +16,8 @@ export default {
 </script>
 
 <style scoped>
-
+p {
+color: black;
+  margin-top: 80px;
+}
 </style>

@@ -68,7 +68,8 @@ router.post('/login', async function (req, res) {
                     });
                     res.status(200).json({
                         'response' : 'Connexion',
-                        'token' : token
+                        'token' : token,
+                        'id': id
                     });
                 }
                 else if(cptUser == 1 && cptPassword == 0) {
@@ -129,7 +130,8 @@ router.put('/profile', async function(req,res) {
             } 
         });
         if(jwtUtils.verifToken(token)){
-            userId = req.body.id;
+            // let userId = jwtUtils.getUserId(token);
+            let userId = req.body.id;
 
             db.query('UPDATE User SET username=\''+ usernameModif +'\' WHERE User.id = \''+userId+'\'', function(err,result){
                 res.status(200).json(result);

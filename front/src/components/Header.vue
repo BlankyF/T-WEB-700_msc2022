@@ -21,10 +21,13 @@
           <v-btn text>
             <router-link :to="'/'" class="btnHeader"> Press </router-link>
           </v-btn>
-          <v-btn text>
+          <v-btn text v-if="!isLogged">
             <router-link :to="'/register'" class="btnHeader"> Register </router-link>
           </v-btn>
-          <v-btn text>
+          <v-btn text v-if="isLogged" @click="logout" class="btnHeader">
+              Logout
+          </v-btn>
+          <v-btn text v-if="isLogged">
             <v-img
               lazy-src="https://icon-library.com/images/anonymous-user-icon/anonymous-user-icon-12.jpg"
               max-height="50"
@@ -39,7 +42,22 @@
 
 <script>
 export default {
-  name: 'Header'
+  name: 'Header',
+  methods: {
+    logout () {
+      localStorage.removeItem('JWT')
+      this.$router.push({name: 'Login'})
+    }
+  },
+  computed: {
+    isLogged () {
+      if (localStorage.getItem('JWT')) {
+        return true
+      } else {
+        return false
+      }
+    }
+  }
 }
 </script>
 
