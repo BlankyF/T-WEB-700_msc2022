@@ -22,7 +22,6 @@
 
     <v-text-field
       required
-      type="password"
       v-model="password"
       placeholder="password"
       class="textFieldRegister"
@@ -92,11 +91,11 @@ export default {
     isEmptyPassword () {
       if (this.password === '') {
         this.hasErrorForm = true
-        this.errorMessage = 'Mot de passe requis'
+        this.errorMessage += 'Mot de passe requis'
       }
     },
     checkStrenghtPassword () {
-      const regexPassword = /(?=.[a-z])(?=.[A-Z])(?=.[0-9])(?=.[+!@#$%^&*])(?=.{8,})/
+      const regexPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?=.{8,}).*$/
       const found = regexPassword.test(this.password)
       console.log(found)
       if (!found) {

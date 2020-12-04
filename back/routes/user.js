@@ -50,10 +50,10 @@ router.post('/login', async function (req, res) {
                             cpt = 1;
                             id = element.id;
                         }else{
-                            erreur = "mot de passe incorrect";
+                            erreur = "Mot de passe incorrect";
                         }
                     }else{
-                        erreur = "utilisateur introuvable";
+                        erreur = "Utilisateur introuvable";
                     }
                 });
                 if(cpt == 1){

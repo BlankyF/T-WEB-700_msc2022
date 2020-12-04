@@ -4,7 +4,6 @@
     <v-text-field
       required
       v-model="username"
-      type="username"
       placeholder="username"
       class="textFieldLogin"
       solo
@@ -69,7 +68,7 @@ export default {
     checkUsername () {
       if (this.username === '') {
         this.hasErrorForm = true
-        this.errorMessage += 'Username requis'
+        this.errorMessage += 'Username requis. '
       }
       this.checkPassword()
     },
@@ -84,7 +83,7 @@ export default {
     isEmptyPassword () {
       if (this.password === '') {
         this.hasErrorForm = true
-        this.errorMessage = 'Mot de passe requis'
+        this.errorMessage += 'Mot de passe requis. '
       }
     },
     removeError () {
@@ -93,18 +92,22 @@ export default {
         this.hasErrorForm = false
       }, 3000)
     },
-    login () {
+    login: function () {
       axios.post('http://localhost:3000/users/login', {
         username: this.username,
         password: this.password
       })
         .then(response => {
-          localStorage.setItem('JWT', response.data.token)
-          console.log(response)
-          this.$router.push({name: 'Home'})
+          if (response.data.token) {
+            localStorage.setItem('JWT', response.data.token)
+            this.$router.push({name: 'Home'})
+          } else {
+            this.errorMessage = response.data
+            this.hasErrorForm = true
+            this.removeError()
+          }
         })
         .catch(error => {
-          console.log(error)
           this.errorMessage = error.response.data
           this.hasErrorForm = true
           this.removeError()
