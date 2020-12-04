@@ -47,15 +47,17 @@
 
     <v-btn
       text
-    ><router-link :to="'/login'" class="btnToLogin">
-      Login ?
-    </router-link></v-btn>
+    >
+      <router-link :to="'/login'" class="btnToLogin">
+        Login ?
+      </router-link>
+    </v-btn>
+
     <v-alert
       v-if="hasErrorForm"
       type="error"
       outlined
-    > {{errorMessage}}
-    </v-alert>
+    > {{errorMessage}}</v-alert>
   </v-card>
 </template>
 

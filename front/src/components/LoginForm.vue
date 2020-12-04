@@ -2,6 +2,7 @@
   <v-card class="loginCard">
     <h1> Login </h1>
     <v-text-field
+      required
       v-model="username"
       type="username"
       placeholder="username"
@@ -17,6 +18,7 @@
       dense
     ></v-text-field>
     <v-text-field
+      required
       v-model="password"
       type="password"
       placeholder="password"
@@ -25,7 +27,7 @@
       dense
     ></v-text-field>
     <v-btn
-      @click="login"
+      @click="initCheckForm"
       elevation="2"
       class="btnLogin"
     > Login </v-btn>
@@ -36,8 +38,13 @@
         Register ?
       </router-link>
     </v-btn>
-  </v-card>
 
+    <v-alert
+      v-if="hasErrorForm"
+      type="error"
+      outlined
+    > {{errorMessage}}</v-alert>
+  </v-card>
 </template>
 
 <script>
@@ -48,10 +55,44 @@ export default {
   data () {
     return {
       username: '',
-      password: ''
+      password: '',
+      hasErrorForm: false,
+      errorMessage: ''
     }
   },
   methods: {
+    initCheckForm () {
+      this.hasErrorForm = false
+      this.errorMessage = ''
+      this.checkUsername()
+    },
+    checkUsername () {
+      if (this.username === '') {
+        this.hasErrorForm = true
+        this.errorMessage += 'Username requis'
+      }
+      this.checkPassword()
+    },
+    checkPassword () {
+      this.isEmptyPassword()
+      if (!this.hasErrorForm) {
+        this.login()
+      } else {
+        this.removeError()
+      }
+    },
+    isEmptyPassword () {
+      if (this.password === '') {
+        this.hasErrorForm = true
+        this.errorMessage = 'Mot de passe requis'
+      }
+    },
+    removeError () {
+      setTimeout(() => {
+        this.errorMessage = ''
+        this.hasErrorForm = false
+      }, 3000)
+    },
     login () {
       axios.post('http://localhost:3000/users/login', {
         username: this.username,
@@ -62,12 +103,17 @@ export default {
           console.log(response.data)
           this.$router.push({name: 'Home'})
         })
-        // recup token localStorage.getItem("JWT")
-        // remove token localStorafe.removeItem("JWT")
-        .catch(error => { console.log(error) })
+        .catch(error => {
+          console.log(error)
+          this.errorMessage = error.response.data.error
+          this.hasErrorForm = true
+          this.removeError()
+        })
     }
   }
 }
+// recup token localStorage.getItem("JWT")
+// remove token localStorafe.removeItem("JWT")
 </script>
 
 <style scoped>
