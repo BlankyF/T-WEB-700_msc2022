@@ -85,7 +85,8 @@ router.post('/login', async function (req, res) {
 
 router.post('/logout',async function(req, res) {
     try{
-        userId = req.body.id;
+        let token = req.body.token;
+        let userId = jwtUtils.getUserId(token);
         db.query('UPDATE User SET token = \''+null+'\' WHERE User.id = \''+userId+'\'', function(err,result){
             if(err){ console.log("Erreur Delete:"+err); }else { console.log("Delete ok"); }
         });
