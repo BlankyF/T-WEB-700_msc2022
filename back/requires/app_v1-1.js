@@ -29,5 +29,9 @@ app.use(session({
 
 var User = require('../routes/user');
 app.use('/users', User);
+var Crypto = require('../routes/crypto');
+app.use('/crypto', Crypto);
+var Article = require('../routes/article');
+app.use('/article', Article);
 
 module.exports = app;
