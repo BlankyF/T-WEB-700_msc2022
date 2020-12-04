@@ -108,9 +108,10 @@ router.post('/logout',async function(req, res) {
 });
 
 router.get('/profile', async function(req,res) {
+    console.log(req.query.token);
     try{
-        console.log(req.query);
-        userId = req.query.id;
+        let token = req.query.token;
+        let userId = jwtUtils.getUserId(token);
         db.query('SELECT * FROM User WHERE User.id = \''+userId+'\'', function(err,result){
             res.status(200).json(result);
         })
@@ -121,6 +122,7 @@ router.get('/profile', async function(req,res) {
 
 router.put('/profile', async function(req,res) {
     let token = req.body.token;
+    let userId = jwtUtils.getUserId(token);
     let usernameModif = req.body.username;
     await getUser(async function(data){
         await data.forEach(element => {
