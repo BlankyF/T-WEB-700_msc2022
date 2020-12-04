@@ -40,14 +40,19 @@ router.post('/login', async function (req, res) {
     try {
         let erreur;
         let id;
-        
+        let cptUser = 0;
+        let cptPassword = 0;
         if(req.body.username != null && req.body.password != null){
             await getUser(async function(data){
                 await data.forEach(element => {
-                    cpt = 0;
+                    console.log(req.body.username);
+                    console.log(element.username);
+                    console.log(req.body.username == element.username);
                     if(req.body.username == element.username){
+                        console.log("je passe user = user");
+                        cptUser = 1;
                         if(sha256(req.body.password) == element.password){
-                            cpt = 1;
+                            cptPassword = 1;
                             id = element.id;
                         }else{
                             erreur = "Mot de passe incorrect";
@@ -56,7 +61,7 @@ router.post('/login', async function (req, res) {
                         erreur = "Utilisateur introuvable";
                     }
                 });
-                if(cpt == 1){
+                if(cptPassword == 1 && cptUser == 1){
                     let token = jwtUtils.generateTokenForUser(id);
                     db.query('UPDATE User SET token = \'' + token + '\' WHERE User.id =\''+id+'\'', function(err,result){
                         if(err){ console.log("Erreur INSERT:"+err); }else { console.log("Insert ok"); }
@@ -66,10 +71,14 @@ router.post('/login', async function (req, res) {
                         'token' : token
                     });
                 }
-                else
-                {
+                else if(cptUser == 1 && cptPassword == 0) {
+                    erreur = "Mot de passe incorrect";
+                    res.json(erreur);
+                }else {
+                    erreur = "Utilisateur introuvable";
                     res.json(erreur);
                 }
+                    
             });
 
         }
