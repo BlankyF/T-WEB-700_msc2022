@@ -104,7 +104,7 @@ export default {
         this.errorMessage = 'Le mot de passe doit contenir 8 caractères dont 1 majuscule, 1 chiffre et 1 caractère spécial'
       }
     },
-    checkPassword: function () {
+    checkPassword () {
       this.isEmptyPassword()
       if (this.password !== this.passwordCheck) {
         this.hasErrorForm = true

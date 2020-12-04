@@ -100,12 +100,12 @@ export default {
       })
         .then(response => {
           localStorage.setItem('JWT', response.data.token)
-          console.log(response.data)
+          console.log(response)
           this.$router.push({name: 'Home'})
         })
         .catch(error => {
           console.log(error)
-          this.errorMessage = error.response.data.error
+          this.errorMessage = error.response.data
           this.hasErrorForm = true
           this.removeError()
         })
