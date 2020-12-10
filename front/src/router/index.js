@@ -37,7 +37,7 @@ export default new Router({
       component: Press
     },
     {
-      path: '/article',
+      path: '/article/:articleID',
       name: 'Article',
       component: Article
     }
