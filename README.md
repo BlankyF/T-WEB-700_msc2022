@@ -32,7 +32,7 @@ Github : https://github.com/dryadt/T-WEB-700_msc2022 </br>
 Trello : https://trello.com/b/F3gcLb0f/t-web-700msc2022 </br>
 Swagger: https://app.swaggerhub.com/apis/dryadt/T-WEB-700_msc2022/1.0.0#/</br> 
 Dbdiagram: https://dbdiagram.io/d/5fc0d44c3a78976d7b7da414</br> 
-Mock-ups :  _insert mock up here_ </br> 
+Mock-ups :  https://www.figma.com/file/SqvpBPOwsEhO1rHebz1DAx/WEB---The-Count-of-Money?node-id=0%3A1 </br> 
 Microsoft Teams
 
 ## Project functionnalities and qualities 
