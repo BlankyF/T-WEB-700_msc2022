@@ -12,9 +12,9 @@ router.use(bodyParser.json());
 //get articles (USER + UNAUTHENTIFIED)
 router.get('', async function(req,res) {
     try{
-        console.log(req.query);
+        console.log(req.query.title);
         title = req.query.title;
-        db.query('SELECT * FROM Article WHERE title LIKE "%" \''+title+'\'%', function(err,result){
+        db.query('SELECT * FROM Article WHERE title LIKE "%'+title+'%"', function(err,result){
             console.log('SELECT * FROM Article WHERE title LIKE "%" \''+title+'\'%')
             console.log("result "+result);
             res.status(200).json(result);
@@ -28,7 +28,7 @@ router.get('', async function(req,res) {
 //get article by ID (USER + UNAUTHENTIFIED)
 router.get('/:id', async function(req,res) {
     try{
-        console.log(req.query);
+        console.log(req.params.id);
         id = req.params.id;
         console.log(id);
         db.query('SELECT * FROM Article WHERE Article.id = \''+id+'\'', function(err,result){
