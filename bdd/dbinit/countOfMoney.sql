@@ -1,60 +1,61 @@
 CREATE TABLE `User` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `username` varchar(50),
-  `password` varchar(100),
+  `id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  `mail` varchar (100) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL,
   `cryptoList` varchar(1000),
-  `role` int,
+  `role` int NOT NULL ,
   `preferedCurrency` varchar(50),
   `token` varchar(255)
 )ENGINE=InnoDB;
 
 CREATE TABLE `Role` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `role` varchar(50)
+  `id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  `role` varchar(50) NOT NULL
 )ENGINE=InnoDB;
 
 CREATE TABLE `Article` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `title` varchar(50),
-  `date` DATE,
-  `source` varchar(100),
-  `article_url` varchar(200),
+  `id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  `title` varchar(50) NOT NULL,
+  `date` DATE NOT NULL,
+  `source` varchar(100) NOT NULL,
+  `article_url` varchar(200) NOT NULL,
   `img_url` varchar(200),
-  `crypto` int
+  `crypto` int NOT NULL
 )ENGINE=InnoDB;
 
 CREATE TABLE `Keyword` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `keywordName` varchar(50)
+  `id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  `keywordName` varchar(50) NOT NULL
 )ENGINE=InnoDB;
 
 CREATE TABLE `Crypto` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `cryptoName` varchar(50),
-  `currentPrice` int(20),
-  `hourlyPrice` int(20),
-  `dailyPrice` int(20),
-  `minutePrice` int(20),
-  `openingPrice` int(20),
-  `lowPrice` int(20),
-  `highPrice` int(20),
-  `cryptoUrl` varchar(200),
-  `isDisplayed` boolean
+  `id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  `cryptoName` varchar(50) NOT NULL,
+  `currentPrice` int(20) NOT NULL,
+  `hourlyPrice` int(20) NOT NULL,
+  `dailyPrice` int(20) NOT NULL,
+  `minutePrice` int(20) NOT NULL,
+  `openingPrice` int(20) NOT NULL,
+  `lowPrice` int(20) NOT NULL,
+  `highPrice` int(20) NOT NULL,
+  `cryptoUrl` varchar(200) NOT NULL,
+  `isDisplayed` boolean NOT NULL
 )ENGINE=InnoDB;
 
 CREATE TABLE `Preference` (
-  `userId` int,
-  `cryptoId` int
+  `userId` int NOT NULL,
+  `cryptoId` int NOT NULL
 )ENGINE=InnoDB;
 
 CREATE TABLE `Setting` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `latestArticles` int
 )ENGINE=InnoDB;
 
 CREATE TABLE `Articles_Keyword` (
-  `keywordId` int,
-  `articleId` int
+  `keywordId` int NOT NULL,
+  `articleId` int NOT NULL
 )ENGINE=InnoDB;
 
 INSERT INTO `Article` ( `title`, `date`, `source`, `article_url`, `img_url`, `crypto`) VALUES ('lucas', '2020-12-01', 'https://www.reddit.com/', 'https://twitter.com/', 'https://upload.wikimedia.org/wikipedia/commons/8/8f/NativityChristmasLights2.jpg', '1');

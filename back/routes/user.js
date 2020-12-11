@@ -94,7 +94,8 @@ router.post('/login', async function (req, res) {
 
 router.post('/logout',async function(req, res) {
     try{
-        userId = req.body.id;
+        let token = req.body.token;
+        let userId = jwtUtils.getUserId(token);
         db.query('UPDATE User SET token = \''+null+'\' WHERE User.id = \''+userId+'\'', function(err,result){
             if(err){ console.log("Erreur Delete:"+err); }else { console.log("Delete ok"); }
         });
@@ -123,6 +124,7 @@ router.put('/profile', async function(req,res) {
     let token = req.body.token;
     let userId = jwtUtils.getUserId(token);
     let usernameModif = req.body.username;
+    let preferedCurrency = req.body.preferedCurrency;
     await getUser(async function(data){
         await data.forEach(element => {
             if(req.body.username == element.username){
@@ -132,7 +134,7 @@ router.put('/profile', async function(req,res) {
         if(jwtUtils.verifToken(token)){
             userId = req.body.id;
 
-            db.query('UPDATE User SET username=\''+ usernameModif +'\' WHERE User.id = \''+userId+'\'', function(err,result){
+            db.query('UPDATE User SET username=\''+ usernameModif +'\', preferedCurrency=\'' + preferedCurrency + '\' WHERE User.id = \''+userId+'\'', function(err,result){
                 res.status(200).json(result);
             })
         }else{
