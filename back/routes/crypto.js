@@ -12,13 +12,19 @@ router.use(bodyParser.json());
 //crypto-currency (ADMIN)
 router.delete('/:id', async function(req,res) {
     try{
+        let token = req.body.token;
+        let userId = jwtUtils.getUserId(token);
         //not up to date
-        console.log(req.params.id);
-        id = req.params.id;
-        console.log('DELETE FROM Crypto WHERE id = \''+id+'\'')
-        db.query('DELETE FROM Crypto WHERE id = \''+id+'\'', function(err,result){
-            return res.status(200).json(result);
-        })
+        if(jwtUtils.verifToken(token)){
+            console.log(req.params.id);
+            id = req.params.id;
+            console.log('DELETE FROM Crypto WHERE id = \''+id+'\'')
+            db.query('DELETE FROM Crypto WHERE id = \''+id+'\'', function(err,result){
+                return res.status(200).json(result);
+            })
+        }else{
+            console.log(jwtUtils.verify(token));
+        }
     }catch{
         res.sendStatus(500);
     }
@@ -28,6 +34,8 @@ router.delete('/:id', async function(req,res) {
 router.post('/', async function(req,res) {
     try{
         //not up to date
+        let token = req.body.token;
+        let userId = jwtUtils.getUserId(token);
         console.log(req.body);
         id = req.body.id;
         cryptoName = req.body.cryptoName;
@@ -40,10 +48,14 @@ router.post('/', async function(req,res) {
         highPrice = req.body.highPrice;
         cryptoUrl = req.body.cryptoUrl;
         isDisplayed = req.body.isDisplayed;
-        console.log("INSERT INTO `Crypto`( `cryptoName`, `currentPrice`, `montlyPrice`, `dailyPrice`, `minutePrice`, `openingPrice`, `lowPrice`, `highPrice`, `cryptoUrl`, `isDisplayed`) VALUES ('"+cryptoName+"', "+currentPrice+", "+montlyPrice+", "+dailyPrice+", "+minutePrice+", "+openingPrice+", "+lowPrice+", "+highPrice+", '"+cryptoUrl+"', "+isDisplayed+")")
-        db.query("INSERT INTO `Crypto`( `cryptoName`, `currentPrice`, `montlyPrice`, `dailyPrice`, `minutePrice`, `openingPrice`, `lowPrice`, `highPrice`, `cryptoUrl`, `isDisplayed`) VALUES ('"+cryptoName+"', "+currentPrice+", "+montlyPrice+", "+dailyPrice+", "+minutePrice+", "+openingPrice+", "+lowPrice+", "+highPrice+", '"+cryptoUrl+"', "+isDisplayed+")", function(err,result){
-            return res.status(200).json(result);
-        })
+        if(jwtUtils.verifToken(token)){
+            var query = ("INSERT INTO `Crypto`( `cryptoName`, `currentPrice`, `montlyPrice`, `dailyPrice`, `minutePrice`, `openingPrice`, `lowPrice`, `highPrice`, `cryptoUrl`, `isDisplayed`) VALUES ('"+cryptoName+"', "+currentPrice+", "+montlyPrice+", "+dailyPrice+", "+minutePrice+", "+openingPrice+", "+lowPrice+", "+highPrice+", '"+cryptoUrl+"', "+isDisplayed+")")
+            db.query(query, function(err,result){
+                return res.status(200).json(result);
+            })
+        }else{
+            console.log(jwtUtils.verify(token));
+        }
     }catch{
         res.sendStatus(500);
     }
@@ -52,11 +64,17 @@ router.post('/', async function(req,res) {
 //crypto-currency by ID (USER)
 router.get('/:cmid', async function(req,res) {
     try{
-        var query = 'SELECT * FROM Crypto WHERE Crypto.id = \''+req.params.cmid+'\'';
-        console.log(query)
-         db.query(query, function(err,result){
-            return res.status(200).json(result);
-        })
+        let token = req.body.token;
+        let userId = jwtUtils.getUserId(token);
+        if(jwtUtils.verifToken(token)){
+            var query = 'SELECT * FROM Crypto WHERE Crypto.id = \''+req.params.cmid+'\'';
+            console.log(query)
+            db.query(query, function(err,result){
+                return res.status(200).json(result);
+            })
+        }else{
+            console.log(jwtUtils.verify(token));
+        }
     }catch{
         res.sendStatus(500);
     }
@@ -83,22 +101,28 @@ router.get('/', async function(req,res) {
 router.get('/:cmid/period/:period', async function(req,res) {
     try{
         //not up to date
-        switch (req.params.period) {
-            case "monthly":
-                var query = 'SELECT montlyPrice FROM Crypto WHERE Crypto.id = \''+req.params.cmid+'\'';
-                break;
-            case "hourly":
-                var query = 'SELECT hourlyPrice FROM Crypto WHERE Crypto.id = \''+req.params.cmid+'\'';
-                break;
-        
-            default:
-                var query = 'SELECT minutePrice FROM Crypto WHERE Crypto.id = \''+req.params.cmid+'\'';
-                break;
+        let token = req.body.token;
+        let userId = jwtUtils.getUserId(token);
+        if(jwtUtils.verifToken(token)){
+            switch (req.params.period) {
+                case "monthly":
+                    var query = 'SELECT montlyPrice FROM Crypto WHERE Crypto.id = \''+req.params.cmid+'\'';
+                    break;
+                case "hourly":
+                    var query = 'SELECT hourlyPrice FROM Crypto WHERE Crypto.id = \''+req.params.cmid+'\'';
+                    break;
+            
+                default:
+                    var query = 'SELECT minutePrice FROM Crypto WHERE Crypto.id = \''+req.params.cmid+'\'';
+                    break;
+            }
+            console.log(query)
+            db.query(query, function(err,result){
+                return res.status(200).json(result);
+            })
+        }else{
+            console.log(jwtUtils.verify(token));
         }
-        console.log(query)
-         db.query(query, function(err,result){
-            return res.status(200).json(result);
-        })
     }catch{
         res.sendStatus(500);
     }
