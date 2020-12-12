@@ -128,41 +128,47 @@ router.get('/profile', async function(req,res) {
 
 router.put('/profile', async function(req,res) {
     let token = req.body.token;
-    let userId = jwtUtils.getUserId(token);
     let usernameModif = req.body.username;
     let password = req.body.password;
     let preferedCurrency = req.body.currency;
     let cryptoList = req.body.cryptoListId;
     let keywordList = req.body.keywordList;
-    console.log(preferedCurrency);
-    console.log(cryptoList);
-    console.log(keywordList);
+    let userId = jwtUtils.getUserId(token);
+    
     await getUser(async function(data){
         await data.forEach(element => {
-            if(req.body.username == element.username){
+            if(req.body.username == element.username && element.id != userId){
                 return res.status(401).json({'error':'user already exists'});
             } 
-        });
-        if(jwtUtils.verifToken(token)){
-            let userId = jwtUtils.getUserId(token);
-            db.query('UPDATE User SET username=\''+ usernameModif +'\', password=\''+ password +'\', preferedCurrency=\'' + preferedCurrency + '\' WHERE User.id = \''+userId+'\'', function(err,result){
-                db.query('SELECT * FROM Preference WHERE Preference.userId = \''+userId+'\'', function(err,pref){
-                    pref.forEach(pref => {
-                        let cpt;
-                        let existance;
-                        cryptoList.forEach(newPref => {
-                            console.log("pref:" + pref.cryptoId +" new pref:"+newPref);
-                            console.log(newPref == pref.cryptoId);
-                            if(newPref ){
-                                
-                            }
-                        });
-                    });
+            if(jwtUtils.verifToken(token)){
+                
+                db.query('UPDATE User SET username=\''+ usernameModif +'\', password=\''+ password +'\', preferedCurrency=\'' + preferedCurrency + '\' WHERE User.id = \''+userId+'\'', function(err,result){
                 });
-            });
-        }else{
-            console.log(jwtUtils.verify(token));
-        }
+                db.query('SELECT cryptoId FROM Preference WHERE Preference.userId = \''+userId+'\'', function(err,prefs){
+                    if(prefs == ''){
+                        cryptoList.forEach(crypto => {
+                            console.log(crypto);
+                            params=[userId,crypto];
+                            db.query('INSERT INTO Preference (userId,cryptoId) Values (?,?)',params, function(err,result){
+                                
+                            });
+                        }); 
+                    }else {
+                        db.query('DELETE FROM Preference WHERE userId = \''+ userId +'\'', function (err,result){ 
+                        });
+                        cryptoList.forEach(crypto => {
+                            param = [userId,crypto];
+                            console.log(param);
+                            // db.query('INSERT INTO Preference (userId,cryptoId) VALUES (?,?)',param,function(err,result){
+                                
+                            // });
+                        });
+                    }
+                }); 
+            }else{
+                console.log(jwtUtils.verify(token));
+            }
+        });
     });
 });
 
