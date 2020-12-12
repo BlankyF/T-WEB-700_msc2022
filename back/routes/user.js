@@ -13,6 +13,7 @@ router.post('/register', async function (req, res) {
     try {
         var username = req.body.username;
         var password = req.body.password;
+        var mail = req.body.mail;
 
         if( username == null || password == null){
             return res.status(400).json({ 'error': 'missing parameters'});
@@ -24,8 +25,8 @@ router.post('/register', async function (req, res) {
                     return res.status(401).json({'error':'user already exists'});
                 } 
             });
-            let param = [username,sha256(password),2];
-            db.query('INSERT INTO User (username,password,role) values (?,?,?)',param,function(err,result){
+            let param = [mail,username,sha256(password),2];
+            db.query('INSERT INTO User (mail,username,password,role) values (?,?,?,?)',param,function(err,result){
                 if(err){ console.log("Erreur INSERT:"+err); }else { console.log("Insert ok"); }
             });
             return res.status(200).json({'message':'Success'});
@@ -108,12 +109,17 @@ router.post('/logout',async function(req, res) {
 });
 
 router.get('/profile', async function(req,res) {
-    console.log(req.query.token);
     try{
+        var results = {};
         let token = req.query.token;
         let userId = jwtUtils.getUserId(token);
         db.query('SELECT * FROM User WHERE User.id = \''+userId+'\'', function(err,result){
-            res.status(200).json(result);
+            results.user = result;
+            db.query('SELECT Crypto.id, Crypto.cryptoName FROM Crypto INNER JOIN Preference on Crypto.id = Preference.cryptoId WHERE Preference.userId = \''+userId+'\'', function(err,result){
+                results.crypto = result;
+                res.status(200).json(results);   
+            })
+            
         })
     }catch{
         res.sendStatus(500);
@@ -124,7 +130,13 @@ router.put('/profile', async function(req,res) {
     let token = req.body.token;
     let userId = jwtUtils.getUserId(token);
     let usernameModif = req.body.username;
-    let preferedCurrency = req.body.preferedCurrency;
+    let password = req.body.password;
+    let preferedCurrency = req.body.currency;
+    let cryptoList = req.body.cryptoListId;
+    let keywordList = req.body.keywordList;
+    console.log(preferedCurrency);
+    console.log(cryptoList);
+    console.log(keywordList);
     await getUser(async function(data){
         await data.forEach(element => {
             if(req.body.username == element.username){
@@ -132,11 +144,22 @@ router.put('/profile', async function(req,res) {
             } 
         });
         if(jwtUtils.verifToken(token)){
-            userId = req.body.id;
-
-            db.query('UPDATE User SET username=\''+ usernameModif +'\', preferedCurrency=\'' + preferedCurrency + '\' WHERE User.id = \''+userId+'\'', function(err,result){
-                res.status(200).json(result);
-            })
+            let userId = jwtUtils.getUserId(token);
+            db.query('UPDATE User SET username=\''+ usernameModif +'\', password=\''+ password +'\', preferedCurrency=\'' + preferedCurrency + '\' WHERE User.id = \''+userId+'\'', function(err,result){
+                db.query('SELECT * FROM Preference WHERE Preference.userId = \''+userId+'\'', function(err,pref){
+                    pref.forEach(pref => {
+                        let cpt;
+                        let existance;
+                        cryptoList.forEach(newPref => {
+                            console.log("pref:" + pref.cryptoId +" new pref:"+newPref);
+                            console.log(newPref == pref.cryptoId);
+                            if(newPref ){
+                                
+                            }
+                        });
+                    });
+                });
+            });
         }else{
             console.log(jwtUtils.verify(token));
         }
@@ -152,4 +175,5 @@ async function getUser(callback){
             callback(result);
         });
 }
+
 module.exports = router;

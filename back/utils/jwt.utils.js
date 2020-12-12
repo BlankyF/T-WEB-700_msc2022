@@ -1,17 +1,18 @@
 var jwt = require ('jsonwebtoken');
 
+const JWT_SIGN_SECRET = "CountOfMoney"
+
 module.exports = {
     generateTokenForUser: function(userData){
         let user = {id:userData};
-        console.log(user);
-        let token = jwt.sign(user,process.env.JWT_SIGN_SECRET,{expiresIn:86399});
+        let token = jwt.sign(user,JWT_SIGN_SECRET,{expiresIn:86399});
         return token;
     },
 
     verifToken(req){
         let token = req;
         let res;
-        jwt.verify(token, process.env.JWT_SIGN_SECRET, function(err,decoded){
+        jwt.verify(token,JWT_SIGN_SECRET, function(err,decoded){
             if(err){
                 res = err; 
             }else{
@@ -19,5 +20,13 @@ module.exports = {
             };
         });
         return res;
+    },
+    
+    getUserId(req) {
+        let token = req;
+        let res;
+        let decoded = jwt.decode(token, {complete:true}); 
+        res = decoded.payload.id;
+        return res ;
     }
 }
