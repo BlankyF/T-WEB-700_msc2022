@@ -2,23 +2,25 @@ version: "3"
 
 services:
 
-  front:
-    build: front
-    volumes:
-      - ./front:/home/node/app
-    ports:
-      - "8082:8080"
-    networks:
-      - bridge
+#  front:
+#    build: ./front
+#    volumes:
+#      - ./front:/home/node/app
+#    ports:
+#      - "8080:8080"
+#    networks:
+#      - bridge
+#    container_name: docker_front
 
   back:
-    build: back
+    build: ./back
     volumes:
       - ./back:/home/node/app
     ports:
       - "3000:3000"
     networks:
       - bridge
+    container_name: docker_back
       
   mysql:
     container_name: money-mysql

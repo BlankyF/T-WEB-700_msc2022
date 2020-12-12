@@ -10,13 +10,6 @@
       dense
     ></v-text-field>
     <v-text-field
-      type="email"
-      placeholder="email"
-      class="textFieldLogin"
-      solo
-      dense
-    ></v-text-field>
-    <v-text-field
       required
       v-model="password"
       type="password"
