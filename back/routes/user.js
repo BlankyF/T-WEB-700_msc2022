@@ -165,7 +165,10 @@ router.put('/profile', async function(req,res) {
                     });
                 });
             }
-        }); 
+        });
+        db.query('SELECT keywordId FROM KeywordPreference WHERE userId = \''+userId+'\'', function(err,keyword){
+            
+        });
         res.status(200).json("Modify succeded");
     }else{
         console.log(jwtUtils.verify(token));
