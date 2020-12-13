@@ -25,7 +25,14 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="823219b0-276e-4378-ab93-9138591f7d1e" name="Default Changelist" comment="" />
+    <list default="true" id="823219b0-276e-4378-ab93-9138591f7d1e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/front/src/components/RssFeed.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Views/Press.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/Views/Press.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/SelectRSSFeed.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/VueRssFeed.vue" beforeDir="false" />
+    </list>
     <list id="b95018d6-f6e1-49e9-8060-f49b065a0d66" name="Revert &quot;[ADD] new database struct&quot;" comment="Revert &quot;[ADD] new database struct&quot;&#10;&#10;This reverts commit b327c5d8" />
     <list id="3f791236-a9cc-488e-8b28-4f9b3b3cebcc" name="Revert &quot;yolo&quot;" comment="Revert &quot;yolo&quot;&#10;&#10;This reverts commit 25045a3f" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,13 +44,14 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="Vue Single File Component" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="BrasseurDev" />
+        <entry key="$PROJECT_DIR$" value="HugoDev" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -114,6 +122,7 @@
       <workItem from="1607794506878" duration="4776000" />
       <workItem from="1607854038011" duration="7725000" />
       <workItem from="1607882108697" duration="195000" />
+      <workItem from="1607882449162" duration="8314000" />
     </task>
     <task id="LOCAL-00001" summary="[ADD] updated routing / homepage draft">
       <created>1607591990907</created>
