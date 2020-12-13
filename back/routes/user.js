@@ -117,10 +117,12 @@ router.get('/profile', async function(req,res) {
             results.user = result;
             db.query('SELECT Crypto.id, Crypto.cryptoName FROM Crypto INNER JOIN Preference on Crypto.id = Preference.cryptoId WHERE Preference.userId = \''+userId+'\'', function(err,result){
                 results.crypto = result;
-                res.status(200).json(results);   
-            })
-            
-        })
+                db.query('SELECT keyword FROM KeywordPreference WHERE userId = \''+userId+'\'',function(err, result){
+                    results.keyword=result;
+                    res.status(200).json(results); 
+                });
+            });
+        });
     }catch{
         res.sendStatus(500);
     }
@@ -166,8 +168,26 @@ router.put('/profile', async function(req,res) {
                 });
             }
         });
-        db.query('SELECT keywordId FROM KeywordPreference WHERE userId = \''+userId+'\'', function(err,keyword){
-            
+        db.query('SELECT keywordId FROM KeywordPreference WHERE userId = \''+userId+'\'', function(err,keywords){
+            if(keywords == ''){
+                keywordList.forEach(keyword => {
+                    console.log(keyword);
+                    params=[userId,keyword];
+                    db.query('INSERT INTO KeywordPreference (userId,keyword) Values (?,?)',params, function(err,result){
+                        
+                    });
+                }); 
+            }else {
+                db.query('DELETE FROM KeywordPreference WHERE userId = \''+ userId +'\'', function (err,result){ 
+                    keywordList.forEach(keyword => {
+                        params = [userId,keyword];
+                        console.log(params);
+                        db.query('INSERT INTO KeywordPreference (userId,keyword) Values (?,?)',params,function(err,result){
+                            
+                        });
+                    });
+                });
+            }
         });
         res.status(200).json("Modify succeded");
     }else{
