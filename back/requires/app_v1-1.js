@@ -29,7 +29,7 @@ app.use(session({
     cookie: { maxAge: 365 * 24 * 60 * 60 * 1000}
 }));
 
-refreshCryptoPrices();
+setTimeout(()=>refreshCryptoPrices(),1000*15);
 setInterval(() => refreshCryptoPrices(),1000*60*5);
 
 function refreshCryptoPrices(){
