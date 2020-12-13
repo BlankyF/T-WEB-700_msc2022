@@ -13,6 +13,7 @@ router.post('/register', async function (req, res) {
     try {
         var username = req.body.username;
         var password = req.body.password;
+        var mail = req.body.mail;
 
         if( username == null || password == null){
             return res.status(400).json({ 'error': 'missing parameters'});
@@ -24,8 +25,8 @@ router.post('/register', async function (req, res) {
                     return res.status(401).json({'error':'user already exists'});
                 } 
             });
-            let param = [username,sha256(password),2];
-            db.query('INSERT INTO User (username,password,role) values (?,?,?)',param,function(err,result){
+            let param = [mail,username,sha256(password),2];
+            db.query('INSERT INTO User (mail,username,password,role) values (?,?,?,?)',param,function(err,result){
                 if(err){ console.log("Erreur INSERT:"+err); }else { console.log("Insert ok"); }
             });
             return res.status(200).json({'message':'Success'});
@@ -55,10 +56,10 @@ router.post('/login', async function (req, res) {
                             cptPassword = 1;
                             id = element.id;
                         }else{
-                            erreur = "Mot de passe incorrect";
+                            erreur = "mot de passe incorrect";
                         }
                     }else{
-                        erreur = "Utilisateur introuvable";
+                        erreur = "utilisateur introuvable";
                     }
                 });
                 if(cptPassword == 1 && cptUser == 1){
@@ -68,8 +69,7 @@ router.post('/login', async function (req, res) {
                     });
                     res.status(200).json({
                         'response' : 'Connexion',
-                        'token' : token,
-                        'id': id
+                        'token' : token
                     });
                 }
                 else if(cptUser == 1 && cptPassword == 0) {
@@ -110,11 +110,19 @@ router.post('/logout',async function(req, res) {
 
 router.get('/profile', async function(req,res) {
     try{
-        console.log(req.query);
-        userId = req.query.id;
+        var results = {};
+        let token = req.query.token;
+        let userId = jwtUtils.getUserId(token);
         db.query('SELECT * FROM User WHERE User.id = \''+userId+'\'', function(err,result){
-            res.status(200).json(result);
-        })
+            results.user = result;
+            db.query('SELECT Crypto.id, Crypto.cryptoName FROM Crypto INNER JOIN Preference on Crypto.id = Preference.cryptoId WHERE Preference.userId = \''+userId+'\'', function(err,result){
+                results.crypto = result;
+                db.query('SELECT keyword FROM KeywordPreference WHERE userId = \''+userId+'\'',function(err, result){
+                    results.keyword=result;
+                    res.status(200).json(results); 
+                });
+            });
+        });
     }catch{
         res.sendStatus(500);
     }
@@ -123,23 +131,69 @@ router.get('/profile', async function(req,res) {
 router.put('/profile', async function(req,res) {
     let token = req.body.token;
     let usernameModif = req.body.username;
-    await getUser(async function(data){
-        await data.forEach(element => {
-            if(req.body.username == element.username){
-                return res.status(401).json({'error':'user already exists'});
-            } 
+    let password = req.body.password;
+    let preferedCurrency = req.body.currency;
+    let cryptoList = req.body.cryptoListId;
+    let keywordList = req.body.keywordList;
+    let userId = jwtUtils.getUserId(token);
+    
+    if(jwtUtils.verifToken(token)){
+        await getUser(async function(data){
+            await data.forEach(element => {
+                if(req.body.username == element.username && element.id != userId){
+                    return res.status(401).json({'error':'user already exists'});
+                } 
+            });
         });
-        if(jwtUtils.verifToken(token)){
-            // let userId = jwtUtils.getUserId(token);
-            let userId = req.body.id;
-
-            db.query('UPDATE User SET username=\''+ usernameModif +'\' WHERE User.id = \''+userId+'\'', function(err,result){
-                res.status(200).json(result);
-            })
-        }else{
-            console.log(jwtUtils.verify(token));
-        }
-    });
+        db.query('UPDATE User SET username=\''+ usernameModif +'\', password=\''+ password +'\', preferedCurrency=\'' + preferedCurrency + '\' WHERE User.id = \''+userId+'\'', function(err,result){
+        });
+        db.query('SELECT cryptoId FROM Preference WHERE Preference.userId = \''+userId+'\'', function(err,prefs){
+            if(prefs == ''){
+                cryptoList.forEach(crypto => {
+                    console.log(crypto);
+                    params=[userId,crypto];
+                    db.query('INSERT INTO Preference (userId,cryptoId) Values (?,?)',params, function(err,result){
+                        
+                    });
+                }); 
+            }else {
+                db.query('DELETE FROM Preference WHERE userId = \''+ userId +'\'', function (err,result){ 
+                    cryptoList.forEach(crypto => {
+                        param = [userId,crypto];
+                        console.log(param);
+                        db.query('INSERT INTO Preference (userId,cryptoId) VALUES (?,?)',param,function(err,result){
+                            
+                        });
+                    });
+                });
+            }
+        });
+        db.query('SELECT keywordId FROM KeywordPreference WHERE userId = \''+userId+'\'', function(err,keywords){
+            if(keywords == ''){
+                keywordList.forEach(keyword => {
+                    console.log(keyword);
+                    params=[userId,keyword];
+                    db.query('INSERT INTO KeywordPreference (userId,keyword) Values (?,?)',params, function(err,result){
+                        
+                    });
+                }); 
+            }else {
+                db.query('DELETE FROM KeywordPreference WHERE userId = \''+ userId +'\'', function (err,result){ 
+                    keywordList.forEach(keyword => {
+                        params = [userId,keyword];
+                        console.log(params);
+                        db.query('INSERT INTO KeywordPreference (userId,keyword) Values (?,?)',params,function(err,result){
+                            
+                        });
+                    });
+                });
+            }
+        });
+        res.status(200).json("Modify succeded");
+    }else{
+        console.log(jwtUtils.verify(token));
+    }
+        
 });
 
 
@@ -151,4 +205,5 @@ async function getUser(callback){
             callback(result);
         });
 }
+
 module.exports = router;
