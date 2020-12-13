@@ -118,9 +118,6 @@ a {
 .spinner > div {
   width: 18px;
   height: 18px;
-  /* background-color: #ff641b; */
-  background-color: #42b983;
-  background-color: #777;
   margin-right: 10px;
 
   border-radius: 100%;
