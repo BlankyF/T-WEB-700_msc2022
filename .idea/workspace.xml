@@ -25,11 +25,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="823219b0-276e-4378-ab93-9138591f7d1e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/main.js" afterDir="false" />
-    </list>
+    <list default="true" id="823219b0-276e-4378-ab93-9138591f7d1e" name="Default Changelist" comment="" />
     <list id="b95018d6-f6e1-49e9-8060-f49b065a0d66" name="Revert &quot;[ADD] new database struct&quot;" comment="Revert &quot;[ADD] new database struct&quot;&#10;&#10;This reverts commit b327c5d8" />
     <list id="3f791236-a9cc-488e-8b28-4f9b3b3cebcc" name="Revert &quot;yolo&quot;" comment="Revert &quot;yolo&quot;&#10;&#10;This reverts commit 25045a3f" />
     <option name="SHOW_DIALOG" value="false" />
@@ -60,7 +56,6 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../fork/T-WEB-700_msc2022" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -118,6 +113,7 @@
       <workItem from="1607677070037" duration="1837000" />
       <workItem from="1607794506878" duration="4776000" />
       <workItem from="1607854038011" duration="7725000" />
+      <workItem from="1607882108697" duration="195000" />
     </task>
     <task id="LOCAL-00001" summary="[ADD] updated routing / homepage draft">
       <created>1607591990907</created>
@@ -150,7 +146,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="dev" />
+                        <option value="KuntzDev" />
                       </list>
                     </value>
                   </entry>
