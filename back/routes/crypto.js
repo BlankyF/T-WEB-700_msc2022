@@ -6,6 +6,7 @@ var sql = require("mssql");
 var sha256 = require("sha256");
 var jwtUtils = require('../utils/jwt.utils');
 const { token } = require('morgan');
+const https = require('https');
 
 router.use(bodyParser.json());
 
@@ -102,23 +103,39 @@ router.get('/:cmid/period/:period', async function(req,res) {
     try{
         //not up to date
         let token = req.body.token;
-        let userId = jwtUtils.getUserId(token);
-        if(jwtUtils.verifToken(token)){
+        // if(jwtUtils.verifToken(token)){
+        if(true){
             switch (req.params.period) {
                 case "monthly":
-                    var query = 'SELECT montlyPrice FROM Crypto WHERE Crypto.id = \''+req.params.cmid+'\'';
+                    var interval = 'm1';
                     break;
                 case "hourly":
-                    var query = 'SELECT hourlyPrice FROM Crypto WHERE Crypto.id = \''+req.params.cmid+'\'';
+                    var interval = 'h1';
                     break;
             
                 default:
-                    var query = 'SELECT minutePrice FROM Crypto WHERE Crypto.id = \''+req.params.cmid+'\'';
+                    var interval = 'd1';
                     break;
             }
+            var query = `SELECT cryptoName FROM Crypto WHERE id = "${req.params.cmid}"`;
             console.log(query)
-            db.query(query, function(err,result){
-                return res.status(200).json(result);
+             db.query(query, function(err,result){
+                var url = `https://api.coincap.io/v2/assets/${result[0].cryptoName}/history?interval=${interval}`
+                console.log(url)
+                https.get(url, (resquest) => {
+                  var buffers = []
+                  resquest
+                    .on('data', function(chunk) {
+                      buffers.push(chunk)
+                    })
+                    .on('end', function() {
+                      var cryptoPrices = JSON.parse(Buffer.concat(buffers).toString()).data
+                      return res.status(200).json(cryptoPrices);
+                      
+                    })
+                }).on("error", (err) => {
+                  console.log("Error: " + err.message);
+                });
             })
         }else{
             console.log(jwtUtils.verify(token));

@@ -33,10 +33,6 @@ CREATE TABLE `Crypto` (
   `id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `cryptoName` varchar(50) NOT NULL,
   `currentPrice` int(20) NOT NULL,
-  `hourlyPrice` int(20) NOT NULL,
-  `dailyPrice` int(20) NOT NULL,
-  `minutePrice` int(20) NOT NULL,
-  `openingPrice` int(20) NOT NULL,
   `lowPrice` int(20) NOT NULL,
   `highPrice` int(20) NOT NULL,
   `cryptoUrl` varchar(200) NOT NULL,
@@ -62,7 +58,7 @@ INSERT INTO `Article` ( `title`, `date`, `source`, `article_url`, `img_url`, `cr
 INSERT INTO `Article` (`title`, `date`, `source`, `article_url`, `img_url`, `crypto`) VALUES ('testvalue2', '2020-11-21', 'https://www.youtube.com/', 'https://facebook.com/', 'https://upload.wikimedia.org/wikipedia/commons/8/8f/NativityChristmasLights2.jpg', '2');
 INSERT INTO Role Values (1,'admin');
 INSERT INTO Role Values (2,'user');
-INSERT INTO `Crypto` (`cryptoName`, `currentPrice`,`hourlyPrice`,`dailyPrice`,`minutePrice`, `openingPrice`, `lowPrice`, `highPrice`, `cryptoUrl`, `isDisplayed`) VALUES ('bidenMoney', '1','4','5','7', '0.1', '0.01', '2', 'https://www.lemonde.fr/international/article/2020/12/04/etats-unis-joe-biden-se-concentre-sur-le-covid-et-veut-integrer-anthony-fauci-a-son-equipe_6062120_3210.html', '1'), ('trumpMoney','1','10','12', '5', '2', '0', '4', 'https://www.theguardian.com/us-news/ng-interactive/2020/dec/03/us-election-results-2020-joe-biden-defeats-donald-trump-to-win-presidency', '0'); 
+INSERT INTO `Crypto` (`cryptoName`, `currentPrice`, `lowPrice`, `highPrice`, `cryptoUrl`, `isDisplayed`) VALUES ('bitcoin', '1', '0.01', '2', 'https://www.lemonde.fr/international/article/2020/12/04/etats-unis-joe-biden-se-concentre-sur-le-covid-et-veut-integrer-anthony-fauci-a-son-equipe_6062120_3210.html', '1'), ('ethereum','1', '0', '4', 'https://www.theguardian.com/us-news/ng-interactive/2020/dec/03/us-election-results-2020-joe-biden-defeats-donald-trump-to-win-presidency', '0'); 
 INSERT INTO `Setting` (`latestArticles`) VALUES ('1');
 
 ALTER TABLE `Articles_Keyword` ADD FOREIGN KEY (`keywordId`) REFERENCES `Keyword` (`id`);
