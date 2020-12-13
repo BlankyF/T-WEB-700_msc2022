@@ -1,9 +1,9 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <div v-if="status == 'test' || status == 'user'">
+    <div v-if="status === 'test' || status === 'user'">
       <div class="chart" v-if="dataCrypt">
-        <div v-if="status == 'user'">
+        <div v-if="status === 'user'">
           <ul class="selectPeriod">
             <li>
               <v-card class="selectPeriodCase">
@@ -35,7 +35,7 @@
           <li class="CryptCol">Highest price of the day</li>
         </ul>
       </v-card>
-      <v-card class="CryptList" v-for="(crypto, index) in CryptArr" v-if="crypto.visible === true" v-bind:index="index" v-bind:key="crypto.id">
+      <v-card class="CryptList" v-for="(crypto, index) in CryptArr" v-if="(status === 'user' && crypto.visible !== false) || (status === 'test')" v-bind:index="index" v-bind:key="crypto.id">
         <ul class="CryptLine">
           <li class="CryptCol">
             <button @click="fillData(crypto.openingPrice, crypto.currentPrice)">{{ index+1 }}</button>
@@ -48,7 +48,7 @@
         </ul>
       </v-card>
     </div>
-    <div v-if="status == 'admin'">
+    <div v-if="status === 'admin'">
       <h2>List of all cryptocurrencies</h2>
       <div class="CryptList">
         <ul class="CryptLine">
@@ -89,18 +89,28 @@ let status
 let dataCrypt
 let period = 'minute'
 let token = localStorage.getItem('JWT')
-let CryptArr
-axios.get('http://localhost:3000/cryptos')
+let CryptArr = [{cryptoName: 'Bitcoin', currentPrice: 18923, openingPrice: 18934, lowPrice: 17276, highPrice: 18107, visible: true}, {cryptoName: 'test', currentPrice: 15923, openingPrice: 12034, lowPrice: 17276, highPrice: 18107, visible: true}, {cryptoName: 'unseen', currentPrice: 17923, openingPrice: 18034, lowPrice: 17276, highPrice: 18107, visible: false}, {cryptoName: 'test2', currentPrice: 19923, openingPrice: 18034, lowPrice: 17276, highPrice: 18107, visible: true}]
+axios.get('http://localhost:3000/crypto')
   .then(response => {
-    console.log(response.data)
+    console.log('get crypto data:', response.data)
+    if (response.data[0]) {
+      CryptArr = response.data
+    }
   })
   .catch(error => { console.error(error) })
 console.log('cryptArr: ', CryptArr, 'token', token)
 console.log('url', urlArr)
-if (urlArr[1]) {
-  optArr = urlArr[1].split('&')
-  console.log('opt', optArr[0].split('=')[1])
-  status = optArr[0].split('=')[1]
+if (!token) {
+  status = 'test'
+} else {
+  status = 'user'
+}
+if (urlArr[1] && status === 'user') {
+  optArr = urlArr[1].split('&')[0].split('=')[1]
+  console.log('opt', optArr)
+  if (optArr === 'admin') {
+    status = 'admin'
+  }
 }
 
 export default {
@@ -114,7 +124,7 @@ export default {
       status: status,
       dataCrypt: dataCrypt,
       period: period,
-      CryptArr: [{cryptoName: 'Bitcoin', currentPrice: 18923, openingPrice: 18934, lowPrice: 17276, highPrice: 18107, visible: true}, {cryptoName: 'test', currentPrice: 15923, openingPrice: 12034, lowPrice: 17276, highPrice: 18107, visible: true}, {cryptoName: 'unseen', currentPrice: 17923, openingPrice: 18034, lowPrice: 17276, highPrice: 18107, visible: false}, {cryptoName: 'test2', currentPrice: 19923, openingPrice: 18034, lowPrice: 17276, highPrice: 18107, visible: true}]
+      CryptArr: CryptArr
     }
   },
   methods: {
@@ -162,6 +172,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 80px;
+  margin-bottom: 90px;
 }
 
 .CryptList {
