@@ -9,67 +9,26 @@
         </v-col>
         <v-col :span="12">
           <div style="margin: 20px;"></div>
-          <v-form
-            label-position="top"
-            label-width="100px"
-            :model="rssFeedForm"
-            ref="rssFeedForm"
-            @submit.native.prevent
-          >
-            <v-form-item label="Enter RSS Feed URL">
-              <v-input placeholder="Enter RSS feed URL" v-model="rssFeedForm.feedUrl"></v-input>
-            </v-form-item>
-            <v-form-item>
-              <v-button type="primary" @click="submitForm('rssFeedForm')">Submit</v-button>
-            </v-form-item>
-          </v-form>
-
-          <v-row>
-            <div class="scroll-down">
-              <span>Scroll down to load more</span>
-              <span class="icon-down">
-                <svg style="width:30px;height:30px" viewBox="0 0 30 30">
-                  <path
-                    fill="#2c3e50"
-                    d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
-                  ></path>
-                </svg>
-              </span>
-            </div>
-          </v-row>
-
           <div class="examples">
-            <h3>Examples</h3>
+            <h3> Autres Flux </h3>
             <ul>
               <li>
                 <a
-                  href="https://rss.app/feeds/hmsyAr3PyniBpmOd.xml"
+                  href="https://rss.app/feeds/cAN1yH3jU6nVYJvw.xml"
                   @click="loadExample"
-                >CNN Politics</a>
-              </li>
-              <li>
-                <a
-                  href="https://rss.app/feeds/TYNzLiPKDRnSuxr7.xml"
-                  @click="loadExample"
-                >NPR: Arts & life</a>
-              </li>
-              <li>
-                <a
-                  href="https://rss.app/feeds/feHQ6ZmAWxS0zjj6.xml"
-                  @click="loadExample"
-                >YouTube: PewDiePie</a>
+                > 99 BitCoins </a>
               </li>
               <li>
                 <a
                   href="https://rss.app/feeds/YxkSC62K6JgmWxq6.xml"
                   @click="loadExample"
-                >Google news: Bitcoin</a>
+                > Google news: Bitcoin </a>
               </li>
             </ul>
           </div>
           <v-row class="powered-rss-app">
             Powered by
-            <a href="https://rss.app">RSS.app</a>
+            <a href="https://rss.app"> RSS.app </a>
           </v-row>
         </v-col>
       </v-row>
@@ -91,7 +50,7 @@ export default {
     return {
       feedUrl: 'https://rss.app/feeds/cAN1yH3jU6nVYJvw.xml',
       name: '',
-      limit: 4,
+      limit: 5,
       rssFeedForm: {
         feedUrl: 'https://rss.app/feeds/cAN1yH3jU6nVYJvw.xml'
       }
@@ -113,13 +72,6 @@ export default {
     }
   },
   methods: {
-    submitForm () {
-      if (this.rssFeedForm.feedUrl) {
-        this.feedUrl = this.rssFeedForm.feedUrl
-        // Reset limit
-        this.limit = 5
-      }
-    },
     increaseLimit (loadMore = 5) {
       this.limit += loadMore
     },
@@ -143,41 +95,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-}
-
-.v-header {
-  padding-top: 10px;
-  height: 50px !important;
-  border-bottom: 1px solid #eee;
-}
-
-.nav-left {
-  display: flex;
-  align-items: center;
-  font-weight: bold;
-  color: #333;
-  text-decoration: none;
-}
-
-.vbutton,
-.v-button:focus {
-  background-color: #ff641b;
-  border-color: #ff641b;
-}
-.v-button:hover {
-  background-color: #ff641b;
-  border-color: #ff641b;
-  opacity: 0.9;
-}
-.scroll-down {
-  display: flex;
-  text-align: center;
-  flex-direction: column;
-  margin-top: -10px;
-}
-
-.el-icon-arrow-down {
-  font-size: 35px;
 }
 
 .examples h3 {
@@ -206,7 +123,6 @@ a {
 .powered-rss-app {
   margin-top: 20px;
   font-size: 13px;
-  /* color: #ff641b; */
 }
 
 .el-header h1 {
@@ -214,35 +130,7 @@ a {
   font-weight: 400;
 }
 
-.center {
-  text-align: center;
-}
-
 .nav-left img {
   margin-right: 5px;
-}
-.v-main {
-  margin: auto;
-  padding-top: 50px;
-  max-width: 1300px;
-  width: 100%;
-  color: #2c3e50;
-}
-
-.v-col-12 {
-  padding: 0 20px;
-}
-.v-form-item {
-  margin-top: 30px;
-}
-
-.v-form--label-top .el-form-item__label {
-  font-size: 20px;
-  color: #2c3e50;
-  padding-bottom: 0;
-}
-
-.github-button {
-  text-align: right;
 }
 </style>

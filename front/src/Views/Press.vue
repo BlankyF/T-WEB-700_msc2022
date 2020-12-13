@@ -9,20 +9,12 @@
 </template>
 
 <script>
-import VueRssFeed from '../components/VueRssFeed'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import SelectRSSFeed from '../components/SelectRSSFeed'
 export default {
   name: 'Press',
-  components: {SelectRSSFeed, Footer, Header, VueRssFeed},
-  data () {
-    return {
-      feedUrl: 'https://rss.app/feeds/cAN1yH3jU6nVYJvw.xml',
-      name: '',
-      limit: 5
-    }
-  },
+  components: {SelectRSSFeed, Footer, Header},
   computed: {
     isLogged () {
       return !!localStorage.getItem('JWT')

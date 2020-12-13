@@ -26,11 +26,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="823219b0-276e-4378-ab93-9138591f7d1e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/front/src/components/SelectRSSFeed.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/Views/Press.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/Views/Press.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/components/Article1.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/components/Feed.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/components/Feed.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/SelectRSSFeed.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/components/SelectRSSFeed.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/router/index.js" afterDir="false" />
     </list>
     <list id="b95018d6-f6e1-49e9-8060-f49b065a0d66" name="Revert &quot;[ADD] new database struct&quot;" comment="Revert &quot;[ADD] new database struct&quot;&#10;&#10;This reverts commit b327c5d8" />
     <list id="3f791236-a9cc-488e-8b28-4f9b3b3cebcc" name="Revert &quot;yolo&quot;" comment="Revert &quot;yolo&quot;&#10;&#10;This reverts commit 25045a3f" />
@@ -65,7 +64,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/front/src/Views" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/front" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -79,14 +78,11 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/front/src/Views" />
-      <recent name="$PROJECT_DIR$/front/src/components" />
-      <recent name="$PROJECT_DIR$/front" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/front/src/components" />
       <recent name="$PROJECT_DIR$/front/src/assets" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/front" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -101,9 +97,7 @@
       <option name="presentableId" value="Default" />
       <updated>1606489809985</updated>
       <workItem from="1606489811335" duration="1802000" />
-      <workItem from="1607696402545" duration="8455000" />
-      <workItem from="1607770895870" duration="13153000" />
-      <workItem from="1607792850657" duration="8152000" />
+      <workItem from="1607876342862" duration="1900000" />
     </task>
     <servers />
   </component>
@@ -124,7 +118,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/BrasseurDev" />
+                        <option value="BrasseurDev" />
                       </list>
                     </value>
                   </entry>
@@ -136,5 +130,35 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="232" y="379" key="#ESLint" timestamp="1606641847298">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="232" y="379" key="#ESLint/0.23.1440.877@0.23.1440.877" timestamp="1606641847298" />
+    <state x="427" y="270" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606932408241">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="427" y="270" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.877@0.23.1440.877" timestamp="1606932408241" />
+    <state x="310" y="34" key="CommitChangelistDialog2" timestamp="1606649231888">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="310" y="34" key="CommitChangelistDialog2/0.23.1440.877@0.23.1440.877" timestamp="1606649231888" />
+    <state x="608" y="335" width="752" height="252" key="MultipleFileMergeDialog" timestamp="1606492092753">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="608" y="335" width="752" height="252" key="MultipleFileMergeDialog/0.23.1440.877@0.23.1440.877" timestamp="1606492092753" />
+    <state width="500" height="445" key="SwitcherDM" timestamp="1606651874377">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="500" height="445" key="SwitcherDM/0.23.1440.877@0.23.1440.877" timestamp="1606651874377" />
+    <state x="508" y="382" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606649211974">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="508" y="382" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.877@0.23.1440.877" timestamp="1606649211974" />
+    <state x="385" y="213" width="670" height="676" key="search.everywhere.popup" timestamp="1606932270784">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="385" y="213" width="670" height="676" key="search.everywhere.popup/0.23.1440.877@0.23.1440.877" timestamp="1606932270784" />
   </component>
 </project>
