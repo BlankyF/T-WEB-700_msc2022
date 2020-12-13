@@ -42,15 +42,12 @@ router.post('/', async function(req,res) {
         cryptoName = req.body.cryptoName;
         currentPrice = req.body.currentPrice;
         montlyPrice = req.body.montlyPrice;
-        dailyPrice = req.body.dailyPrice;
-        minutePrice = req.body.minutePrice;
-        openingPrice = req.body.openingPrice;
         lowPrice = req.body.lowPrice;
         highPrice = req.body.highPrice;
         cryptoUrl = req.body.cryptoUrl;
         isDisplayed = req.body.isDisplayed;
         if(jwtUtils.verifToken(token)){
-            var query = ("INSERT INTO `Crypto`( `cryptoName`, `currentPrice`, `montlyPrice`, `dailyPrice`, `minutePrice`, `openingPrice`, `lowPrice`, `highPrice`, `cryptoUrl`, `isDisplayed`) VALUES ('"+cryptoName+"', "+currentPrice+", "+montlyPrice+", "+dailyPrice+", "+minutePrice+", "+openingPrice+", "+lowPrice+", "+highPrice+", '"+cryptoUrl+"', "+isDisplayed+")")
+            var query = ("INSERT INTO `Crypto`( `cryptoName`, `currentPrice`, `lowPrice`, `highPrice`, `cryptoUrl`, `isDisplayed`) VALUES ('"+cryptoName+"', "+currentPrice+", "+lowPrice+", "+highPrice+", '"+cryptoUrl+"', "+isDisplayed+")")
             db.query(query, function(err,result){
                 return res.status(200).json(result);
             })
