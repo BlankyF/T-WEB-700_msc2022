@@ -1,41 +1,46 @@
 <template>
   <v-card class="loginCard">
-    <h1> Login </h1>
+    <h1> Modifier mot de passe </h1>
     <v-text-field
       required
-      v-model="username"
-      placeholder="username"
-      class="textFieldLogin"
-      solo
-      dense
-    ></v-text-field>
-    <v-text-field
-      required
-      v-model="password"
+      v-model="currentPassword"
       type="password"
-      placeholder="password"
+      placeholder="Mot de passe actuel"
       class="textFieldLogin"
       solo
-      dense
-    ></v-text-field>
+      dense>
+    </v-text-field>
+    <v-text-field
+      required
+      v-model="newPassword"
+      type="password"
+      placeholder="Nouveau mot de passe"
+      class="textFieldLogin"
+      solo
+      dense>
+    </v-text-field>
+    <v-text-field
+      required
+      v-model="ConfirmnewPassword"
+      type="password"
+      placeholder="Confirmation nouveau de passe"
+      class="textFieldLogin"
+      solo
+      dense>
+    </v-text-field>
     <v-btn
       @click="initCheckForm"
       elevation="2"
-      class="btnLogin"
-    > Login </v-btn>
-    <v-btn
-      text
-    >
-      <router-link :to="'/register'" class="btnToRegister">
-        Register ?
-      </router-link>
+      class="btnChange">
+      Changer
     </v-btn>
 
     <v-alert
       v-if="hasErrorForm"
       type="error"
-      outlined
-    > {{errorMessage}}</v-alert>
+      outlined>
+      {{errorMessage}}
+    </v-alert>
   </v-card>
 </template>
 
@@ -43,11 +48,12 @@
 import axios from 'axios'
 
 export default {
-  name: 'LoginForm',
+  name: 'ChangeMDPForm',
   data () {
     return {
-      username: '',
-      password: '',
+      currentPassword: '',
+      newPassword: '',
+      confirmnewPassword: '',
       hasErrorForm: false,
       errorMessage: ''
     }
@@ -56,27 +62,27 @@ export default {
     initCheckForm () {
       this.hasErrorForm = false
       this.errorMessage = ''
-      this.checkUsername()
+      this.checkNewPassword()
     },
-    checkUsername () {
-      if (this.username === '') {
+    checkNewPassword () {
+      if (this.newPassword === '') {
         this.hasErrorForm = true
-        this.errorMessage += 'Username requis. '
+        this.errorMessage += 'Nouveau mot de passe vide '
       }
       this.checkPassword()
     },
     checkPassword () {
       this.isEmptyPassword()
       if (!this.hasErrorForm) {
-        this.login()
+        this.ChangePassword()
       } else {
         this.removeError()
       }
     },
     isEmptyPassword () {
-      if (this.password === '') {
+      if (this.confirmnewPassword === '') {
         this.hasErrorForm = true
-        this.errorMessage += 'Mot de passe requis. '
+        this.errorMessage += 'Confirmation vide '
       }
     },
     removeError () {
@@ -85,10 +91,9 @@ export default {
         this.hasErrorForm = false
       }, 3000)
     },
-    login: function () {
-      axios.post('http://localhost:3000/users/login', {
-        username: this.username,
-        password: this.password
+    ChangePassword: function () {
+      axios.post('http://localhost:3000/users/changeMDPForm', {
+        newPassword: this.password
       })
         .then(response => {
           if (response.data.token) {
@@ -109,40 +114,33 @@ export default {
     }
   }
 }
-// recup token localStorage.getItem("JWT")
-// remove token localStorafe.removeItem("JWT")
 </script>
 
 <style scoped>
-  .loginCard {
-    background-color: #F9C81D;
-    height: 70%;
-    width: 30%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+.loginCard {
+  background-color: #F9C81D;
+  height: 70%;
+  width: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
-  h1 {
-    margin-top: 30px;
-    text-align: center;
-  }
+h1 {
+  margin-top: 30px;
+  text-align: center;
+}
 
-  .textFieldLogin {
-    margin: 20px;
-    background-color: #F9C81D;
-  }
+.textFieldLogin {
+  margin: 20px;
+  background-color: #F9C81D;
+}
 
-  .btnLogin {
-    position: absolute;
-    margin-bottom: 60px;
-    left: 40%;
-  }
+.btnChange {
+  position: absolute;
+  margin-bottom: 60px;
+  left: 35%;
+}
 
-  .btnToRegister {
-    text-decoration: none;
-    color: white;
-    margin: 30px;
-  }
 </style>

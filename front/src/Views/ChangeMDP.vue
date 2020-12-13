@@ -1,18 +1,18 @@
 <template>
   <div>
     <Header></Header>
+    <ChangeMDPForm></ChangeMDPForm>
     <Footer></Footer>
-    <RegisterForm></RegisterForm>
   </div>
 </template>
 
 <script>
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import RegisterForm from '../components/RegisterForm'
+import ChangeMDPForm from '../components/ChangeMDPForm'
 export default {
-  name: 'Register',
-  components: {RegisterForm, Footer, Header}
+  name: 'ChangeMDP',
+  components: {ChangeMDPForm, Footer, Header}
 }
 </script>
 
@@ -21,4 +21,5 @@ p {
   color: black;
   margin-top: 80px;
 }
+
 </style>

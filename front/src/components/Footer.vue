@@ -3,7 +3,7 @@
   <v-footer absolute height="70px">
     <v-row>
       <v-btn text style="margin-left: 250px"> Contact us
-        <router-link :to="home"></router-link>
+        <router-link :to="'/'"></router-link>
       </v-btn>
     </v-row>
     <v-row >
