@@ -89,18 +89,20 @@ let status
 let dataCrypt
 let period = 'minute'
 let token = localStorage.getItem('JWT')
-let CryptArr
-axios.get('http://localhost:3000/cryptos')
+let CryptArr = [{cryptoName: 'Bitcoin', currentPrice: 18923, openingPrice: 18934, lowPrice: 17276, highPrice: 18107, visible: true}, {cryptoName: 'test', currentPrice: 15923, openingPrice: 12034, lowPrice: 17276, highPrice: 18107, visible: true}, {cryptoName: 'unseen', currentPrice: 17923, openingPrice: 18034, lowPrice: 17276, highPrice: 18107, visible: false}, {cryptoName: 'test2', currentPrice: 19923, openingPrice: 18034, lowPrice: 17276, highPrice: 18107, visible: true}]
+axios.get('http://localhost:3000/crypto')
   .then(response => {
-    console.log(response.data)
+    console.log('get crypto data:', response.data)
+    if (response.data[0]) {
+      CryptArr = response.data
+    }
   })
   .catch(error => { console.error(error) })
 console.log('cryptArr: ', CryptArr, 'token', token)
 console.log('url', urlArr)
 if (!token) {
   status = 'test'
-}
-else {
+} else {
   status = 'user'
 }
 if (urlArr[1] && status === 'user') {
@@ -122,7 +124,7 @@ export default {
       status: status,
       dataCrypt: dataCrypt,
       period: period,
-      CryptArr: [{cryptoName: 'Bitcoin', currentPrice: 18923, openingPrice: 18934, lowPrice: 17276, highPrice: 18107, visible: true}, {cryptoName: 'test', currentPrice: 15923, openingPrice: 12034, lowPrice: 17276, highPrice: 18107, visible: true}, {cryptoName: 'unseen', currentPrice: 17923, openingPrice: 18034, lowPrice: 17276, highPrice: 18107, visible: false}, {cryptoName: 'test2', currentPrice: 19923, openingPrice: 18034, lowPrice: 17276, highPrice: 18107, visible: true}]
+      CryptArr: CryptArr
     }
   },
   methods: {
