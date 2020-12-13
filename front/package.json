@@ -13,8 +13,12 @@
   },
   "dependencies": {
     "axios": "^0.21.0",
+    "chart.js": "^2.9.4",
+    "axios": "^0.21.0",
     "crypto-news-api": "^2.2.2",
     "vue": "^2.5.2",
+    "vue-axios": "^3.2.0",
+    "vue-chartjs": "^3.5.1",
     "vue-axios": "^3.2.0",
     "vue-router": "^3.0.1",
     "vue-rss-feed": "^0.2.4",
