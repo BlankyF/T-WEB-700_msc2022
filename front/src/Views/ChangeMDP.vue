@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header></Header>
-    <p> Ici ça change son MDP </p>
+    <ChangeMDPForm></ChangeMDPForm>
     <Footer></Footer>
   </div>
 </template>
@@ -9,9 +9,10 @@
 <script>
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import ChangeMDPForm from '../components/ChangeMDPForm'
 export default {
   name: 'ChangeMDP',
-  components: {Footer, Header}
+  components: {ChangeMDPForm, Footer, Header}
 }
 </script>
 

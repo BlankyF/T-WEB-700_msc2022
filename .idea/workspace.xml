@@ -26,20 +26,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="823219b0-276e-4378-ab93-9138591f7d1e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/front/src/Views/ChangeMDP.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front/src/Views/FavCrypto.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front/src/Views/Press.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_11_2020_16_48_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_11_2020_16_48__Default_Changelist_.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/components/Article.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/components/Article1.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/components/ChangeMDPForm.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/components/Feed.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/components/VueRssFeed.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/Views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/Views/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/Views/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/Views/Register.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/components/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/components/Header.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/components/LoginForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/components/LoginForm.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Views/ChangeMDP.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/Views/ChangeMDP.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Views/Press.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/Views/Press.vue" afterDir="false" />
     </list>
     <list id="b95018d6-f6e1-49e9-8060-f49b065a0d66" name="Revert &quot;[ADD] new database struct&quot;" comment="Revert &quot;[ADD] new database struct&quot;&#10;&#10;This reverts commit b327c5d8" />
     <list id="3f791236-a9cc-488e-8b28-4f9b3b3cebcc" name="Revert &quot;yolo&quot;" comment="Revert &quot;yolo&quot;&#10;&#10;This reverts commit 25045a3f" />
@@ -74,7 +70,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/front" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/front/src/Views" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -88,11 +84,14 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/front/src/assets" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/front/src/Views" />
+      <recent name="$PROJECT_DIR$/front/src/components" />
       <recent name="$PROJECT_DIR$/front" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/front/src/components" />
+      <recent name="$PROJECT_DIR$/front/src/assets" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -108,7 +107,8 @@
       <updated>1606489809985</updated>
       <workItem from="1606489811335" duration="1802000" />
       <workItem from="1607696402545" duration="8455000" />
-      <workItem from="1607770895870" duration="6740000" />
+      <workItem from="1607770895870" duration="13153000" />
+      <workItem from="1607792850657" duration="5524000" />
     </task>
     <servers />
   </component>
