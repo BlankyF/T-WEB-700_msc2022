@@ -135,41 +135,42 @@ router.put('/profile', async function(req,res) {
     let keywordList = req.body.keywordList;
     let userId = jwtUtils.getUserId(token);
     
-    await getUser(async function(data){
-        await data.forEach(element => {
-            if(req.body.username == element.username && element.id != userId){
-                return res.status(401).json({'error':'user already exists'});
-            } 
-            if(jwtUtils.verifToken(token)){
-                
-                db.query('UPDATE User SET username=\''+ usernameModif +'\', password=\''+ password +'\', preferedCurrency=\'' + preferedCurrency + '\' WHERE User.id = \''+userId+'\'', function(err,result){
-                });
-                db.query('SELECT cryptoId FROM Preference WHERE Preference.userId = \''+userId+'\'', function(err,prefs){
-                    if(prefs == ''){
-                        cryptoList.forEach(crypto => {
-                            console.log(crypto);
-                            params=[userId,crypto];
-                            db.query('INSERT INTO Preference (userId,cryptoId) Values (?,?)',params, function(err,result){
-                                
-                            });
-                        }); 
-                    }else {
-                        db.query('DELETE FROM Preference WHERE userId = \''+ userId +'\'', function (err,result){ 
-                        });
-                        cryptoList.forEach(crypto => {
-                            param = [userId,crypto];
-                            console.log(param);
-                            // db.query('INSERT INTO Preference (userId,cryptoId) VALUES (?,?)',param,function(err,result){
-                                
-                            // });
-                        });
-                    }
-                }); 
-            }else{
-                console.log(jwtUtils.verify(token));
-            }
+    if(jwtUtils.verifToken(token)){
+        await getUser(async function(data){
+            await data.forEach(element => {
+                if(req.body.username == element.username && element.id != userId){
+                    return res.status(401).json({'error':'user already exists'});
+                } 
+            });
         });
-    });
+        db.query('UPDATE User SET username=\''+ usernameModif +'\', password=\''+ password +'\', preferedCurrency=\'' + preferedCurrency + '\' WHERE User.id = \''+userId+'\'', function(err,result){
+        });
+        db.query('SELECT cryptoId FROM Preference WHERE Preference.userId = \''+userId+'\'', function(err,prefs){
+            if(prefs == ''){
+                cryptoList.forEach(crypto => {
+                    console.log(crypto);
+                    params=[userId,crypto];
+                    db.query('INSERT INTO Preference (userId,cryptoId) Values (?,?)',params, function(err,result){
+                        
+                    });
+                }); 
+            }else {
+                db.query('DELETE FROM Preference WHERE userId = \''+ userId +'\'', function (err,result){ 
+                    cryptoList.forEach(crypto => {
+                        param = [userId,crypto];
+                        console.log(param);
+                        db.query('INSERT INTO Preference (userId,cryptoId) VALUES (?,?)',param,function(err,result){
+                            
+                        });
+                    });
+                });
+            }
+        }); 
+        res.status(200).json("Modify succeded");
+    }else{
+        console.log(jwtUtils.verify(token));
+    }
+        
 });
 
 

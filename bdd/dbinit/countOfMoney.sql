@@ -3,7 +3,6 @@ CREATE TABLE `User` (
   `mail` varchar (100) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `cryptoList` varchar(1000),
   `role` int NOT NULL ,
   `preferedCurrency` varchar(50),
   `token` varchar(255)
