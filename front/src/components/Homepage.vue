@@ -104,7 +104,7 @@ if (urlArr[1]) {
 }
 
 export default {
-  name: 'Home',
+  name: 'Homepage',
   components: {
     LineChart
   },

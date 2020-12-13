@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header></Header>
-    <p> Je suis home </p>
+    <Homepage></Homepage>
     <Footer></Footer>
   </div>
 </template>
@@ -9,9 +9,11 @@
 <script>
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import Homepage from '../components/Homepage'
+
 export default {
   name: 'Home',
-  components: {Footer, Header}
+  components: {Homepage, Footer, Header}
 }
 </script>
 
